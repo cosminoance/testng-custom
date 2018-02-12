@@ -30,14 +30,17 @@ public class SalesE2E extends RightMoveSeleniumTest {
 		//these could be set within files, like json
 		//then loaded at runtime in case of internationalization
 		_filterPage.selectRadius(Radius.Within20Mile);
-		_filterPage.selectMinPrice("50,000");
-		_filterPage.selectMaxPrice("10,000,000");
+		//done with send keys
+		_filterPage.selectMinPrice("50000");
+		//done with select by value
+		_filterPage.selectMaxPrice("10000000");
 		_filterPage.selectMinBedrooms("2");
 		_filterPage.selectMaxBedrooms("4");
 		_filterPage.selectPropertyType(PropertyType.Houses);
 		//used to much time to find a solution for this, not working
-		//_filterPage.selectAddedToSite(AddedSince.Last14Days);
-		_filterPage.SubmitSearch();
+		_filterPage.selectAddedToSite(AddedSince.Last14Days);
+		_filterPage.toggleIncludeUnderSSTC();
+		
 		
 		try {
 			Thread.sleep(10000);
@@ -45,6 +48,7 @@ public class SalesE2E extends RightMoveSeleniumTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		_filterPage.SubmitSearch();
 		
 		
 	}

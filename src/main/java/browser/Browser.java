@@ -76,4 +76,16 @@ public class Browser {
 		getElement(by).click();
 	}
 
+	public void setCheckbox(By checkbox, boolean b) {
+		WebElement checkBox = getElement(checkbox);
+		if(checkBox.isSelected() != b)
+			checkBox.click();				
+	}
+
+	public boolean isSelected(By by) {
+		WebElement el = getElement(by);
+		return  el.isSelected();
+		
+	}
+
 }

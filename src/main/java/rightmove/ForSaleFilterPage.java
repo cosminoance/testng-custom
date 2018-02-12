@@ -1,8 +1,8 @@
 package rightmove;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 import browser.Browser;
 import page.Page;
@@ -19,7 +19,7 @@ public class ForSaleFilterPage implements Page {
 	By SelectMaxBedrooms = By.id("maxBedrooms");
 	By SelectPropertyType = By.id("displayPropertyType");
 	By SelectAddedToSite = By.id("maxDaysSinceAdded");
-	By CheckBoxIncludeSSTC = By.id("includeSSTC");
+	By CheckBoxIncludeSSTC = By.xpath("//label[@for='includeSSTC']");
 	By NonActing = By.id("headerTitle");
 
 	By ButtonSubmitSearchForm = By.xpath("//div[contains(@class, 'submit' )and .//button[@id='submit']]");
@@ -33,30 +33,28 @@ public class ForSaleFilterPage implements Page {
 	}
 
 	public void selectRadius(String radius) {
-		_driver.getSelect(SelectRadius).selectByVisibleText(radius);
+		_driver.getSelect(SelectRadius).selectByValue(radius);
 	}
 
 	public void selectMinPrice(String minPrice) {
-		// _driver.getBrowser().findElement(By.xpath("//div[@class='touchsearch-selectwrapper
-		// touchsearch-minselectwrapper
-		// touchsearch-searchcriteria-selectwrapper']/select[@id='minPrice']/option[@value='"+minPrice+"']")).click();
-		// _driver.getSelect(MinPrice).selectByValue(minPrice);
-		_driver.getElement(SelectMinPrice).sendKeys(minPrice);
+		_driver.getSelect(SelectMinPrice).selectByValue(minPrice);
+		// _driver.getElement(SelectMinPrice).sendKeys(minPrice);
 	}
 
 	public void selectMaxPrice(String maxPrice) {
-		// _driver.getSelect(MaxPrice).selectByValue(maxPrice);
-		_driver.getElement(MaxPrice).sendKeys(maxPrice);
+		_driver.getSelect(MaxPrice).selectByValue(maxPrice);
+		// for safari
+		// _driver.getElement(MaxPrice).sendKeys(maxPrice);
 	}
 
 	public void selectMinBedrooms(String minBedrooms) {
-		// _driver.getSelect(MinBedrooms).selectByVisibleText(minBedrooms);
-		_driver.getElement(SelectMinBedrooms).sendKeys(minBedrooms);
+		 _driver.getSelect(SelectMinBedrooms).selectByValue(minBedrooms);
+		//_driver.getElement(SelectMinBedrooms).sendKeys(minBedrooms);
 	}
 
 	public void selectMaxBedrooms(String maxBedrooms) {
-		// _driver.getSelect(MaxBedrooms).selectByVisibleText(maxBedrooms);
-		_driver.getElement(SelectMaxBedrooms).sendKeys(maxBedrooms);
+		_driver.getSelect(SelectMaxBedrooms).selectByValue(maxBedrooms);
+		//_driver.getElement(SelectMaxBedrooms).sendKeys(maxBedrooms);
 	}
 
 	public void SubmitSearch() {
@@ -64,15 +62,26 @@ public class ForSaleFilterPage implements Page {
 	}
 
 	public void selectPropertyType(String propertyType) {
-		_driver.getElement(SelectPropertyType).sendKeys(propertyType);
-
+		_driver.getSelect(SelectPropertyType).selectByValue(propertyType);
+		//_driver.getElement(SelectPropertyType).sendKeys(propertyType);
 	}
-
-	//not reliable
-	//too much time being spent on this
+	
 	public void selectAddedToSite(String added) {
-		_driver.getElement(SelectAddedToSite).sendKeys("Last" + Keys.SPACE + added);
-
+		_driver.getSelect(SelectAddedToSite).selectByValue(added);
+		
+	}
+			
+	/**
+	 * toggles the Include Under Offer, Sold STC... checkbox
+	 * @param checked
+	 */
+	public void toggleIncludeUnderSSTC() {
+		WebElement el = _driver.getElement(CheckBoxIncludeSSTC);
+		el.click();
+		//some tries based on another xpath
+//		if(el.isSelected()!=checked) {
+//			el.findElement(By.xpath("following-sibling::label")).click();
+//		}
 	}
 
 }
