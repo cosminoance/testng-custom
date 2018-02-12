@@ -1,5 +1,7 @@
 package browser;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 public class Browser {
 	RemoteWebDriver browser;
@@ -99,6 +102,28 @@ public class Browser {
 			}
 		});
 		return true;
+	}
+	
+	//used to wait for loading to disappear for example
+	public boolean waitOnElementGone(By by, int timeOut) {
+		WebDriverWait wait = new WebDriverWait(browser, timeOut);
+		wait.until(new ExpectedCondition() {
+			@Override
+			public Object apply(Object arg0) {
+				try {
+					getElement(by);
+					return false;
+				}
+				catch (Exception e){
+					return true;
+				}				
+			}
+		});
+		return true;
+	}//div[contains(@class, 'searchLoading')]
+
+	public List<WebElement> getElementsBy(By by) {
+		return browser.findElements(by);
 	}
 
 }

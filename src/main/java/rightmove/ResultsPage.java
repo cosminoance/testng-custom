@@ -1,6 +1,9 @@
 package rightmove;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import browser.Browser;
@@ -51,6 +54,12 @@ public class ResultsPage implements Page {
 	
 	//ELEMENTS
 	By SelectSortBy = By.id("sortType");
+	By NonFeaturedResultSet = By.xpath("//div[contains(@class, 'searchResult') and not(div[contains(@class,'featured')])]");
+	By NonPremiumResultSet = By.xpath("//div[contains(@class, 'searchResult') and not(div[contains(@class,'premium')])]");
+	By SimpleResultSet = By.xpath("//div[contains(@class, 'searchResult') and not(div[contains(@class,'premium')]) and not(div[contains(@class,'featured')])]");
+	By FeatureadResultSet = By.xpath("//div[contains(@class, 'searchResult') and (div[contains(@class,'featured')])]");
+	By PremiumResultSet = By.xpath("//div[contains(@class, 'searchResult') and (div[contains(@class,'premium')])]");
+	By SearchResultLoadingState = By.xpath("//div[contains(@class, 'searchLoading')]");
 	//example of wildcard by used in show as method
 	String ButtonShowAs = "//div[@id='searchLayoutControls']/div//*[contains(text(),'%wildcard%')]/ancestor::div[1]";
 	
@@ -60,8 +69,7 @@ public class ResultsPage implements Page {
 		_driver.getSelect(SelectSortBy).selectByValue(sortOrder);
 		if(!sortOrder.equals(Sorting.HighestPrice.value()))
 			Assert.assertTrue(_driver.waitOnUrlContains("sortType="+sortOrder), "Sorting as finished working");
-		else
-			Assert.assertFalse(_driver.waitOnUrlContains("sortType="));
+		
 	}
 	
 	/**
@@ -70,6 +78,21 @@ public class ResultsPage implements Page {
 	 */
 	public void showResultsAs(String as) {
 		_driver.clickElement(WildCardBy.build(ButtonShowAs, as));
+	}
+	
+	public List<WebElement> getNonSpecialResults(){
+		return _driver.getElementsBy(SimpleResultSet);
+	}
+	
+	/**
+	 * Open a non special (non premium, non featured) listing
+	 * @param index
+	 */
+	public void openNonSpecialListing(int index) {
+		//keep this from opening listing before being available
+		_driver.waitOnElementGone(SearchResultLoadingState, 3);
+		//click on index from list
+		getNonSpecialResults().get(index).click();
 	}
 
 }

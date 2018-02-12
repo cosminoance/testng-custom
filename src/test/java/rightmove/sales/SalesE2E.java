@@ -53,14 +53,19 @@ public class SalesE2E extends RightMoveSeleniumTest {
 		_results = (ResultsPage) PageCreate.create(Pages.ResultsPage, browser);
 		_results.sortResultsBy(ResultsPage.Sorting.LowestPrice.value());
 		_results.showResultsAs(ResultsPage.ShowAs.Grid.value());
-
 		// for observation purposes
-		Thread.sleep(10000);
-
+		// Thread.sleep(10000);
 		_results.showResultsAs(ResultsPage.ShowAs.List.value());
 		_results.sortResultsBy(ResultsPage.Sorting.HighestPrice.value());
 		// for observation purposes
-		Thread.sleep(10000);
+		// Thread.sleep(10000);
 
+	}
+
+	@Test(dependsOnMethods = { "changeSortOrder" })
+	public void openFirstNonFeatured() throws InterruptedException {
+		_results.openNonSpecialListing(0);
+		// for observation purposes
+		Thread.sleep(10000);
 	}
 }
