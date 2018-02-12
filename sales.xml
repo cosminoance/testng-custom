@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SalesSuite">
+  <test thread-count="5" name="SalesTest">
+  	<classes>
+  		<class name="rightmove.sales.SuiteSetup"/>
+  		<class name="rightmove.sales.SalesE2E"/>
+  	</classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
