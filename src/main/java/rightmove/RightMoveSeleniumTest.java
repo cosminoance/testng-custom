@@ -2,9 +2,7 @@ package rightmove;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-
 import browser.Browser;
-import browser.BrowserCreate;
 import constants.Constants;
 import test.BasicSeleniumTest;
 

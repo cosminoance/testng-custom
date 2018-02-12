@@ -87,5 +87,18 @@ public class Browser {
 		return  el.isSelected();
 		
 	}
+	
+	public boolean waitOnUrlContains(String toContain) {
+		WebDriverWait wait = new WebDriverWait(browser, 10);
+		wait.until(new ExpectedCondition() {
+			@Override
+			public Object apply(Object arg0) {
+				if(browser.getCurrentUrl().contains(toContain))
+					return true;
+				return false;
+			}
+		});
+		return true;
+	}
 
 }
