@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 public class Browser {
 	RemoteWebDriver browser;
 
@@ -74,53 +73,55 @@ public class Browser {
 	public Select getSelect(By by) {
 		return new Select(getElement(by));
 	}
-	
+
 	public void clickElement(By by) {
 		getElement(by).click();
 	}
 
 	public void setCheckbox(By checkbox, boolean b) {
 		WebElement checkBox = getElement(checkbox);
-		if(checkBox.isSelected() != b)
-			checkBox.click();				
+		if (checkBox.isSelected() != b)
+			checkBox.click();
 	}
 
 	public boolean isSelected(By by) {
 		WebElement el = getElement(by);
-		return  el.isSelected();
-		
+		return el.isSelected();
+
 	}
-	
-	public boolean waitOnUrlContains(String toContain) {
+
+	public boolean waitOnUrlContains(final String toContain) {
 		WebDriverWait wait = new WebDriverWait(browser, 10);
 		wait.until(new ExpectedCondition() {
 			@Override
 			public Object apply(Object arg0) {
-				if(browser.getCurrentUrl().contains(toContain))
+				if (browser.getCurrentUrl().contains(toContain))
 					return true;
 				return false;
 			}
 		});
 		return true;
 	}
-	
-	//used to wait for loading to disappear for example
-	public boolean waitOnElementGone(By by, int timeOut) {
+
+	// used to wait for loading to disappear for example
+	public boolean waitOnElementGone(final By by, int timeOut) {
 		WebDriverWait wait = new WebDriverWait(browser, timeOut);
 		wait.until(new ExpectedCondition() {
 			@Override
-			public Object apply(Object arg0) {
+			public Boolean apply(Object arg0) {
 				try {
-					getElement(by);
-					return false;
-				}
-				catch (Exception e){
+					Thread.sleep(1000);
+					if (browser.findElement(by).isDisplayed())
+						return false;
+					else
+						return true;
+				} catch (final Exception e) {
 					return true;
-				}				
+				}
 			}
 		});
 		return true;
-	}//div[contains(@class, 'searchLoading')]
+	}
 
 	public List<WebElement> getElementsBy(By by) {
 		return browser.findElements(by);

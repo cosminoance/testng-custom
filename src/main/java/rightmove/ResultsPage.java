@@ -56,7 +56,7 @@ public class ResultsPage implements Page {
 	By SelectSortBy = By.id("sortType");
 	By NonFeaturedResultSet = By.xpath("//div[contains(@class, 'searchResult') and not(div[contains(@class,'featured')])]");
 	By NonPremiumResultSet = By.xpath("//div[contains(@class, 'searchResult') and not(div[contains(@class,'premium')])]");
-	By SimpleResultSet = By.xpath("//div[contains(@class, 'searchResult') and not(div[contains(@class,'premium')]) and not(div[contains(@class,'featured')])]");
+	By SimpleResultSet = By.xpath("//h2[@class='propertyCard-title']//ancestor::div[not(contains(@class,'premium')) and not(contains(@class,'featured'))]/ancestor::div[contains(@class,'l-searchResult is-list')]");
 	By FeatureadResultSet = By.xpath("//div[contains(@class, 'searchResult') and (div[contains(@class,'featured')])]");
 	By PremiumResultSet = By.xpath("//div[contains(@class, 'searchResult') and (div[contains(@class,'premium')])]");
 	By SearchResultLoadingState = By.xpath("//div[contains(@class, 'searchLoading')]");
@@ -90,7 +90,7 @@ public class ResultsPage implements Page {
 	 */
 	public void openNonSpecialListing(int index) {
 		//keep this from opening listing before being available
-		_driver.waitOnElementGone(SearchResultLoadingState, 3);
+		_driver.waitOnElementGone(SearchResultLoadingState, 6);
 		//click on index from list
 		getNonSpecialResults().get(index).click();
 	}

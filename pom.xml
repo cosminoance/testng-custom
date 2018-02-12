@@ -40,6 +40,11 @@
 			<version>3.8.1</version>
 		</dependency>
 		<dependency>
+			<groupId>ru.stqa.selenium</groupId>
+			<artifactId>webdriver-expected-conditions</artifactId>
+			<version>1.0.41</version>
+		</dependency>
+		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-chrome-driver</artifactId>
 			<version>3.8.1</version>
@@ -54,7 +59,7 @@
 				<configuration>
 					<systemPropertyVariables>
 						<!-- General constants -->
-						<os>win</os>
+						<os>osx</os>
 						<landingpage>http://rightmove.co.uk</landingpage>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
