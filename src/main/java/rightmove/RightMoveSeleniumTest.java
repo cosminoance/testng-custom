@@ -16,7 +16,7 @@ public class RightMoveSeleniumTest extends BasicSeleniumTest {
 
 	@BeforeClass
 	public void SetUp() {
-		browser = new Browser("safari", true);
+		browser = new Browser("chrome", true);
 		
 		// we can wrap the browser instance in a new class with specific actions
 		// but this was faster to write
