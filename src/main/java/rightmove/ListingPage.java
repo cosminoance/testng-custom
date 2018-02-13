@@ -14,16 +14,15 @@ public class ListingPage extends PageTemplate {
 	//ELEMENTS
 	By LabelHeaderPrice = By.xpath("//p[@id='propertyHeaderPrice']//strong");
 	
-	
-	
-	
+	/**
+	 * Get Price region on listing
+	 * @return
+	 */
 	public int getPriceRegion() {
-		String price = _driver.getElement(LabelHeaderPrice).getText().replace("£", "").replace(",", "");
+		String price = _driver.getElement(LabelHeaderPrice).getText().replace("£", "").replace(",", "")
+				.replace("pw", "").trim();
 		return Integer.parseInt(price);
 	}
-
-
-
 	
 	public void init() {
 		System.out.println(this.getClass().getName() + " initialising elements");

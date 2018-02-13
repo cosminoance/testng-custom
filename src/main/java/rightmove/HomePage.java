@@ -27,7 +27,8 @@ public class HomePage extends PageTemplate {
 	WebElement InputSearhBox;
 	@FindBy(id="buy")
 	WebElement ButtonSearchForSale;
-
+	@FindBy(id="rent")
+	WebElement ButtonSearchForRent;
 
 	/**
 	 * Used to initialise FindBy elements
@@ -49,14 +50,25 @@ public class HomePage extends PageTemplate {
 	 * @throws SecurityException 
 	 * @throws NoSuchMethodException 
 	 */
-	public ForSaleFilterPage performSearchForSale(String srcValue) {
+	public SearchFilterPage performSearchForSale(String srcValue) {
+		InputSearhBox.clear();
 		InputSearhBox.sendKeys(srcValue);
 		ButtonSearchForSale.click();
 		//wait on filter page to appear
 		//this wouldn't be needed if I had the time to create a custom how locator
 		//to use with FindBy
-		return (ForSaleFilterPage)PageCreate.create(Pages.ForSaleFilterPage, _driver);
+		return (SearchFilterPage)PageCreate.create(Pages.ForSaleFilterPage, _driver);
 		
+	}
+
+	public SearchFilterPage performSearchForRent(String srcValue) {
+		InputSearhBox.clear();
+		InputSearhBox.sendKeys(srcValue);
+		ButtonSearchForRent.click();
+		//wait on filter page to appear
+		//this wouldn't be needed if I had the time to create a custom how locator
+		//to use with FindBy
+		return (SearchFilterPage)PageCreate.create(Pages.ForSaleFilterPage, _driver);
 	}
 
 }

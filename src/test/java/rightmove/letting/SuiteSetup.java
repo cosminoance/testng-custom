@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeSuite;
 
 import constants.Pages;
 import page.PageCreate;
-import rightmove.ForSaleFilterPage;
+import rightmove.SearchFilterPage;
 import rightmove.HomePage;
 import rightmove.ListingPage;
 import rightmove.ResultsPage;
@@ -18,7 +18,7 @@ public class SuiteSetup {
 			IllegalArgumentException, InvocationTargetException {
 		// we need to register the pages in the factory before using them in the test
 		PageCreate.register(Pages.HomePage, HomePage.class);
-		PageCreate.register(Pages.ForSaleFilterPage, ForSaleFilterPage.class);
+		PageCreate.register(Pages.ForSaleFilterPage, SearchFilterPage.class);
 		PageCreate.register(Pages.ResultsPage, ResultsPage.class);
 		PageCreate.register(Pages.ListingPage, ListingPage.class);
 

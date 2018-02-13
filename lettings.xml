@@ -3,14 +3,14 @@
 <suite name="lettingSuite">
 	<!-- Since we are declaring SuiteSetup as a class with @BeforeSuite it doesn't 
 		matter which order we use -->
-	<test thread-count="5" name="SuiteSetup">
+	<test thread-count="1" name="SuiteSetup">
 		<classes>
 			<class name="rightmove.letting.SuiteSetup" />
 		</classes>
 	</test>
-	<test thread-count="5" name="LettingsE2E">
+	<test thread-count="1" name="LettingsE2E">
 		<classes>
-			<class name="rightmove.letting.LettingsE2E" />
+			<class name="rightmove.letting.LettingE2E" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

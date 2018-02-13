@@ -7,9 +7,9 @@ import constants.Pages;
 import page.PageCreate;
 import page.PageTemplate;
 
-public class ForSaleFilterPage extends PageTemplate {
+public class SearchFilterPage extends PageTemplate {
 
-	public ForSaleFilterPage(Browser browser) {
+	public SearchFilterPage(Browser browser) {
 		super(browser);
 		// TODO Auto-generated constructor stub
 	}
@@ -23,6 +23,7 @@ public class ForSaleFilterPage extends PageTemplate {
 	By SelectPropertyType = By.id("displayPropertyType");
 	By SelectAddedToSite = By.id("maxDaysSinceAdded");
 	By CheckBoxIncludeSSTC = By.xpath("//label[@for='includeSSTC']");
+	By CheckBoxIncludeLetAgreed = By.xpath("//label[@for='includeLetAgreed']");
 	By NonActing = By.id("headerTitle");
 
 	By ButtonSubmitSearchForm = By.xpath("//div[contains(@class, 'submit' )and .//button[@id='submit']]");
@@ -84,6 +85,12 @@ public class ForSaleFilterPage extends PageTemplate {
 //		if(el.isSelected()!=checked) {
 //			el.findElement(By.xpath("following-sibling::label")).click();
 //		}
+	}
+
+	public void toggleIncludeLetAgreed() {
+		WebElement el = _driver.getElement(CheckBoxIncludeLetAgreed);
+		el.click();
+		
 	}
 
 }
