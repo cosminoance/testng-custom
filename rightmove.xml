@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="lettingSuite" parallel="tests" thread-count="5">
+<suite name="Rightmove suite" parallel="tests" thread-count="5">
 	<!-- Since we are declaring SuiteSetup as a class with @BeforeSuite it doesn't 
 		matter which order we use -->
-	<test thread-count="1" name="SuiteSetup">
-		<classes>
-			<class name="rightmove.SuiteSetup" />
-		</classes>
-	</test>
+		
 	<test thread-count="1" name="LettingsE2E">
+	<!-- EXAMPLE OF TEST PARAMETERS PASSED FROM XML -->
+		<parameter name="minPrice" value="150" />
+		<parameter name="maxPrice" value="20000" />
 		<classes>
 			<class name="rightmove.LettingE2E" />
 		</classes>
 	</test>
-	<test thread-count="1" name="SalesE2E">
+	<test thread-count="2" name="SalesE2E">
 		<classes>
 			<class name="rightmove.SalesE2E" />
 		</classes>

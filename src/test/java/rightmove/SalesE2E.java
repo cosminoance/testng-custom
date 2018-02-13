@@ -1,8 +1,16 @@
 package rightmove;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import browser.Browser;
 import constants.AddedSince;
+import constants.Constants;
 import constants.Pages;
 import constants.PropertyType;
 import constants.Radius;
@@ -11,23 +19,24 @@ import rightmove.SearchFilterPage;
 import rightmove.HomePage;
 import rightmove.ListingPage;
 import rightmove.ResultsPage;
-import rightmove.RightMoveSeleniumTest;
 
-public class SalesE2E extends RightMoveSeleniumTest {
+/**
+ * EXAMPLE OF ALL IN ONE TEST WITH DATA PROVIDER THIS WOULD BE BETTER SUITED FOR
+ * MULTI VERIFICATION EASY TESTS
+ */
+public class SalesE2E {
 
-	private HomePage _homePage;
-	private SearchFilterPage _filterPage;
-	private ResultsPage _resultsPage;
-	private ListingPage _listingPage;
-
-	@Test
-	public void navigateToLandingPage(){
+	@Test(dataProvider = "AreaCodes")
+	public void searchAndApplyFilters(String areaCode) {		
+		Browser browser = new Browser("chrome", true);
+		browser.get(Constants.LandingPage);
 		// create a homepage
-		_homePage = (HomePage) PageCreate.create(Pages.HomePage, browser);
-		_filterPage = _homePage.performSearchForSale("NW3");
-		//it can also be done directly
-		//_filterPage = (ForSaleFilterPage) PageCreate.create(Pages.ForSaleFilterPage, browser);
-		
+		HomePage _homePage = (HomePage) PageCreate.create(Pages.HomePage, browser);
+		SearchFilterPage _filterPage = _homePage.performSearchForSale(areaCode);
+		// it can also be done directly
+		// _filterPage = (ForSaleFilterPage) PageCreate.create(Pages.ForSaleFilterPage,
+		// browser);
+
 		// example of using constants
 		// these could be set within files, like json
 		// then loaded at runtime in case of internationalization
@@ -43,32 +52,38 @@ public class SalesE2E extends RightMoveSeleniumTest {
 		_filterPage.selectAddedToSite(AddedSince.Last14Days);
 		_filterPage.toggleIncludeUnderSSTC();
 		// submit form
-		_resultsPage = _filterPage.SubmitSearch();
-	}
-
-	@Test(dependsOnMethods = { "navigateToLandingPage" })
-	public void changeSortOrder() {
-		//demo
+		ResultsPage _resultsPage = _filterPage.SubmitSearch();
+		// demo
 		_resultsPage.sortResultsBy(ResultsPage.Sorting.LowestPrice.value());
 		_resultsPage.showResultsAs(ResultsPage.ShowAs.Grid.value());
 		_resultsPage.showResultsAs(ResultsPage.ShowAs.List.value());
 		_resultsPage.sortResultsBy(ResultsPage.Sorting.HighestPrice.value());
-		
-		//actual step
+		// actual step
 		_resultsPage.sortResultsBy(ResultsPage.Sorting.NewestListed.value());
+		//
+		// Assert that properties on first page are listed in order based on Added On
+		// field
+		ListingPage _listingPage = _resultsPage.openNonSpecialListing(0);
+		int price = _listingPage.getPriceRegion();
+		Assert.assertTrue((price > 50000) && (price < 10000000), "Price of property is withing boundaries");
+		
+		browser.close();
 	}
 
-	@Test(dependsOnMethods = { "changeSortOrder" })
-	public void openFirstNonFeatured(){
-		_listingPage = _resultsPage.openNonSpecialListing(0);		
+	@DataProvider(name = "AreaCodes" , parallel = true)
+	public static Object[][] data() {
+		return new Object[][] { { "NW3" }, { "NW4" } };
 	}
-	
-	@Test(dependsOnMethods = { "openFirstNonFeatured" })
-	public void assertListingPrice() throws InterruptedException {
-		int price = _listingPage.getPriceRegion();
-		Assert.assertTrue((price>50000) && (price<10000000),
-				"Price of property is withing boundaries");
+
+	@BeforeClass
+	public void setupSuite() throws NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		// we need to register the pages in the factory before using them in the test
+		PageCreate.register(Pages.HomePage, HomePage.class);
+		PageCreate.register(Pages.ForSaleFilterPage, SearchFilterPage.class);
+		PageCreate.register(Pages.ResultsPage, ResultsPage.class);
+		PageCreate.register(Pages.ListingPage, ListingPage.class);
+
 	}
-	
-	
+
 }

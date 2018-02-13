@@ -72,14 +72,20 @@
 							<name>suitethreadpoolsize</name>
 							<value>2</value>
 						</property>
+						<property>
+							<name>dataproviderthreadcount</name>
+							<value>6</value>
+						</property>
+						<parallel>classes</parallel>
+						<threadCount>10</threadCount>
 					</properties>
-					<parallel>classes</parallel>
-					<threadCount>10</threadCount>
+
 				</configuration>
 
 			</plugin>
 		</plugins>
 	</build>
+
 	<!-- Not enough time to demo for rightmove this could be used to filter 
 		tests <profiles> <profile> <activation> <property> <name>all</name> </property> 
 		</activation> </profile> </profiles> -->
