@@ -66,15 +66,29 @@ public class SalesE2E {
 		ListingPage _listingPage = _resultsPage.openNonSpecialListing(0);
 		int price = _listingPage.getPriceRegion();
 		Assert.assertTrue((price > 50000) && (price < 10000000), "Price of property is withing boundaries");
-		
+		//close browser
 		browser.close();
 	}
 
+	/**
+	 * EXAMPLE OF DATA PROVIDER
+	 * @return
+	 */
 	@DataProvider(name = "AreaCodes" , parallel = true)
 	public static Object[][] data() {
 		return new Object[][] { { "NW3" }, { "NW4" } };
 	}
 
+	/**
+	 * We need to add the pages to the factory, easiest way to do it was here
+	 * WE CAN SETUP A FLAG AND LOCK I THINK THAT ONLY REQUIRES THIS ONCE
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	@BeforeClass
 	public void setupSuite() throws NoSuchMethodException, SecurityException, InstantiationException,
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {

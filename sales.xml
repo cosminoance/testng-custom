@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Test suite" parallel="classes" thread-count="5">
+	<!-- Since we are declaring SuiteSetup as a class with @BeforeSuite it doesn't 
+		matter which order we use -->
+		
+	<test thread-count="1" name="SalesE2E">
+		<classes>
+			<class name="rightmove.SalesE2E" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
+
+
+<!-- THIS IS AN EXAMPLE TEST SUITE WHICH CAN BE USED TO TEST CURRENT DEVELOPMENTS -->

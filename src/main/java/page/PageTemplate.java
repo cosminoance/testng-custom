@@ -8,7 +8,7 @@ public abstract class PageTemplate implements Page{
 	
 	public PageTemplate(Browser browser) {
 		_driver = browser;
-		System.out.println("Generating homepage");
+		System.out.println("Generating");
 	}
 
 }
