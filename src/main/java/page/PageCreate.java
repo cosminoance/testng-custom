@@ -33,19 +33,20 @@ public class PageCreate {
 	 * @param pageName <code>String</code> Name of page
 	 * @param browser <code>RemoteWebDriver</code> browser instance
 	 * @return
-	 * @throws NoSuchMethodException
-	 * @throws SecurityException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
 	 */
-	public static Page create(String pageName, Browser browser) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+	public static Page create(String pageName, Browser browser)
 	{
 		Class<?> pageClass = pages.get(pageName);
 		System.out.print("Class to instantiate "+pageClass + "out of "+ pages.toString());
-		Constructor<?> ctr = pageClass.getDeclaredConstructor(new Class[] {Browser.class  });
-		return (Page) ctr.newInstance(browser);
+		Constructor<?> ctr;
+		try {
+			ctr = pageClass.getDeclaredConstructor(new Class[] {Browser.class  });
+			return (Page) ctr.newInstance(browser);
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			e.printStackTrace();
+			return null;		
+		}		
 	}
 
 }

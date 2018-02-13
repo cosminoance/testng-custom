@@ -2,21 +2,22 @@ package rightmove;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import browser.Browser;
 import constants.Pages;
-import page.Page;
 import page.PageCreate;
+import page.PageTemplate;
 
 
-public class HomePage implements Page {
+public class HomePage extends PageTemplate {
 
-	private Browser _driver;
+	public HomePage(Browser browser) {
+		super(browser);
+		init();
+	}
 
 	//I would create a custom how 
 	//this means that the factory would be able to wait on the elements being created
@@ -26,18 +27,14 @@ public class HomePage implements Page {
 	WebElement InputSearhBox;
 	@FindBy(id="buy")
 	WebElement ButtonSearchForSale;
-	
-	public HomePage(Browser browser) {
-		_driver = browser;
-		System.out.println("Generating homepage");
-		init();
-	}
+
 
 	/**
 	 * Used to initialise FindBy elements
 	 */
 	public void init() {
 		System.out.println(this.getClass().getName() + " initialising elements");
+		//using PageFactory
 		PageFactory.initElements(_driver.getBrowser(), this);
 
 	}
@@ -52,7 +49,7 @@ public class HomePage implements Page {
 	 * @throws SecurityException 
 	 * @throws NoSuchMethodException 
 	 */
-	public ForSaleFilterPage performSearchForSale(String srcValue) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public ForSaleFilterPage performSearchForSale(String srcValue) {
 		InputSearhBox.sendKeys(srcValue);
 		ButtonSearchForSale.click();
 		//wait on filter page to appear

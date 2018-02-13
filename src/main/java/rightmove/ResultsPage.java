@@ -8,19 +8,18 @@ import org.testng.Assert;
 
 import browser.Browser;
 import browser.WildCardBy;
-import page.Page;
+import constants.Pages;
+import page.PageCreate;
+import page.PageTemplate;
 
-public class ResultsPage implements Page {
+public class ResultsPage extends PageTemplate {
 
-	Browser _driver;
 	
 	public ResultsPage(Browser browser) {
-		_driver = browser;
-		System.out.println("Generating homepage");
-		init();
+		super(browser);
+		// TODO Auto-generated constructor stub
 	}
-	
-	@Override
+
 	public void init() {
 		System.out.println(this.getClass().getName() + " initialising elements");
 	}
@@ -87,12 +86,14 @@ public class ResultsPage implements Page {
 	/**
 	 * Open a non special (non premium, non featured) listing
 	 * @param index
+	 * @return 
 	 */
-	public void openNonSpecialListing(int index) {
+	public ListingPage openNonSpecialListing(int index) {
 		//keep this from opening listing before being available
 		_driver.waitOnElementGone(SearchResultLoadingState, 6);
 		//click on index from list
 		getNonSpecialResults().get(index).click();
+		return (ListingPage)PageCreate.create(Pages.ListingPage, _driver);
 	}
 
 }

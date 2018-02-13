@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="LetterSuite">
+<suite name="lettingSuite">
 	<!-- Since we are declaring SuiteSetup as a class with @BeforeSuite it doesn't 
 		matter which order we use -->
 	<test thread-count="5" name="SuiteSetup">
 		<classes>
-			<class name="rightmove.letter.SuiteSetup" />
+			<class name="rightmove.letting.SuiteSetup" />
 		</classes>
 	</test>
-	<test thread-count="5" name="LetterTest">
+	<test thread-count="5" name="LettingsE2E">
 		<classes>
-			<class name="rightmove.letter.LetterE2E" />
+			<class name="rightmove.letting.LettingsE2E" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

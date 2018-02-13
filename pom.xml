@@ -59,7 +59,7 @@
 				<configuration>
 					<systemPropertyVariables>
 						<!-- General constants -->
-						<os>osx</os>
+						<os>win</os>
 						<landingpage>http://rightmove.co.uk</landingpage>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
@@ -71,9 +71,6 @@
 							<value>4</value>
 						</property>
 					</properties>
-
-
-
 				</configuration>
 
 			</plugin>

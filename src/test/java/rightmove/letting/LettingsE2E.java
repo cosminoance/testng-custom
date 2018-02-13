@@ -1,4 +1,4 @@
-package rightmove.letter;
+package rightmove.letting;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -11,7 +11,7 @@ import rightmove.RightMoveSeleniumTest;
 
 
 
-public class LetterE2E extends RightMoveSeleniumTest {
+public class LettingsE2E extends RightMoveSeleniumTest {
 	
 	HomePage homePage;
 	@Test

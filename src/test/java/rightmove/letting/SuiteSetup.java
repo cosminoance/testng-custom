@@ -1,4 +1,4 @@
-package rightmove.letter;
+package rightmove.letting;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -8,6 +8,7 @@ import constants.Pages;
 import page.PageCreate;
 import rightmove.ForSaleFilterPage;
 import rightmove.HomePage;
+import rightmove.ListingPage;
 import rightmove.ResultsPage;
 
 //used to add needed pages before tests in the suite start
@@ -19,6 +20,7 @@ public class SuiteSetup {
 		PageCreate.register(Pages.HomePage, HomePage.class);
 		PageCreate.register(Pages.ForSaleFilterPage, ForSaleFilterPage.class);
 		PageCreate.register(Pages.ResultsPage, ResultsPage.class);
+		PageCreate.register(Pages.ListingPage, ListingPage.class);
 
 	}
 }

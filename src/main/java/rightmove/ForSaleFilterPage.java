@@ -1,15 +1,18 @@
 package rightmove;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-
 import browser.Browser;
-import page.Page;
+import constants.Pages;
+import page.PageCreate;
+import page.PageTemplate;
 
-public class ForSaleFilterPage implements Page {
+public class ForSaleFilterPage extends PageTemplate {
 
-	private Browser _driver;
+	public ForSaleFilterPage(Browser browser) {
+		super(browser);
+		// TODO Auto-generated constructor stub
+	}
 
 	// ELEMENTS
 	By SelectRadius = By.id("radius");
@@ -24,9 +27,7 @@ public class ForSaleFilterPage implements Page {
 
 	By ButtonSubmitSearchForm = By.xpath("//div[contains(@class, 'submit' )and .//button[@id='submit']]");
 
-	public ForSaleFilterPage(Browser browser) {
-		_driver = browser;
-	}
+
 
 	public void init() {
 		System.out.println(this.getClass().getName() + " initialising elements");
@@ -57,8 +58,9 @@ public class ForSaleFilterPage implements Page {
 		//_driver.getElement(SelectMaxBedrooms).sendKeys(maxBedrooms);
 	}
 
-	public void SubmitSearch() {
+	public ResultsPage SubmitSearch() {
 		_driver.clickElement(ButtonSubmitSearchForm);
+		return (ResultsPage) PageCreate.create(Pages.ResultsPage, _driver);
 	}
 
 	public void selectPropertyType(String propertyType) {
