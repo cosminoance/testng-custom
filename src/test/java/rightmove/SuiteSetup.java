@@ -1,4 +1,4 @@
-package rightmove.sales;
+package rightmove;
 
 import java.lang.reflect.InvocationTargetException;
 

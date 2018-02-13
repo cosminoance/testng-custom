@@ -20,7 +20,7 @@ public class ListingPage extends PageTemplate {
 	 */
 	public int getPriceRegion() {
 		String price = _driver.getElement(LabelHeaderPrice).getText().replace("£", "").replace(",", "")
-				.replace("pw", "").trim();
+				.replace("pw", "").replace("pcm", "").trim();
 		return Integer.parseInt(price);
 	}
 	

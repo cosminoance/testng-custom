@@ -17,10 +17,9 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 
 		<!-- This is where we can group test suites -->
-		<settersuite>sales.xml</settersuite>
-		<lettings>lettings.xml</lettings>
+		<rightmovesuite>rightmove.xml</rightmovesuite>
 		<!-- We can assign a default suites property to use with the surefire plugin -->
-		<defaultsuites>${settersuite},${lettings}</defaultsuites>
+		<defaultsuites>${rightmovesuite}</defaultsuites>
 
 	</properties>
 
@@ -71,7 +70,7 @@
 					<properties>
 						<property>
 							<name>suitethreadpoolsize</name>
-							<value>4</value>
+							<value>2</value>
 						</property>
 					</properties>
 					<parallel>classes</parallel>
