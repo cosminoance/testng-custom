@@ -1,7 +1,6 @@
 package constants;
 
 import page.PageCreate;
-import rightmove.HomePage;
 
 public class Pages {
 	
